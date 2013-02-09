@@ -103,6 +103,9 @@ def log_result_regex(flag):
     """ Enables or disables result regex logging. This is useful when trying to debug file_regex and line_regex in build systems """
     sublime_api.log_result_regex(flag)
 
+def log_indexing(flag):
+    sublime_api.log_indexing(flag)
+
 def score_selector(scope_name, selector):
     return sublime_api.score_selector(scope_name, selector)
 
@@ -248,8 +251,13 @@ class Window(object):
             flat_items = []
 
             for i in range(len(items)):
-                for j in range(items_per_row):
-                    flat_items.append(items[i][j])
+                if isinstance(items[i], str):
+                    flat_items.append(items[i])
+                    for j in range(1, items_per_row):
+                        flat_items.append("")
+                else:
+                    for j in range(items_per_row):
+                        flat_items.append(items[i][j])
 
         return sublime_api.window_show_quick_panel(self.window_id, flat_items,
             items_per_row, on_select, on_highlight, flags, selected_index)
@@ -518,21 +526,6 @@ class View(object):
         """ The change_count is incremented whenever the underlying buffer is modified """
         return sublime_api.view_change_count(self.view_id)
 
-    def classify(self, pt):
-        """ Classifies pt, returning a bitwise OR of zero or more of these flags:
-        CLASS_WORD_START
-        CLASS_WORD_END
-        CLASS_PUNCTUATION_START
-        CLASS_PUNCTUATION_END
-        CLASS_SUB_WORD_START
-        CLASS_SUB_WORD_END
-        CLASS_LINE_START
-        CLASS_LINE_END
-        CLASS_EMPTY_LINE
-        """
-
-        return sublime_api.view_classify(self.view_id, pt)
-
     def run_command(self, cmd, args = None):
         sublime_api.view_run_command(self.view_id, cmd, args)
 
@@ -615,6 +608,30 @@ class View(object):
             return sublime_api.view_word_from_region(self.view_id, x)
         else:
             return sublime_api.view_word_from_point(self.view_id, x)
+
+    def classify(self, pt):
+        """ Classifies pt, returning a bitwise OR of zero or more of these flags:
+        CLASS_WORD_START
+        CLASS_WORD_END
+        CLASS_PUNCTUATION_START
+        CLASS_PUNCTUATION_END
+        CLASS_SUB_WORD_START
+        CLASS_SUB_WORD_END
+        CLASS_LINE_START
+        CLASS_LINE_END
+        CLASS_EMPTY_LINE
+        """
+
+        return sublime_api.view_classify(self.view_id, pt)
+
+    def find_by_class(self, pt, forward, classes, separators = ""):
+        return sublime_api.view_find_by_class(self.view_id, pt, forward, classes, separators)
+
+    def expand_by_class(self, x, classes, separators = ""):
+        if isinstance(x, Region):
+            return sublime_api.view_expand_by_class(self.view_id, x.a, x.b, classes, separators)
+        else:
+            return sublime_api.view_expand_by_class(self.view_id, x, x, classes, separators)
 
     def rowcol(self, tp):
         return sublime_api.view_row_col(self.view_id, tp)

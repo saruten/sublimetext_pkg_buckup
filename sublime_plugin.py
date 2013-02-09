@@ -7,6 +7,8 @@ import sys
 import zipfile
 import sublime_api
 
+api_ready = False
+
 application_command_classes = []
 window_command_classes = []
 text_command_classes = []
@@ -29,6 +31,9 @@ all_callbacks = {'on_new': [], 'on_clone': [], 'on_load': [], 'on_close': [],
     'on_clone_async': []}
 
 def unload_module(module):
+    if "plugin_unloaded" in module.__dict__:
+        module.plugin_unloaded()
+    # Check unload_handler too, for backwards compat
     if "unload_handler" in module.__dict__:
         module.unload_handler()
 
@@ -97,6 +102,10 @@ def reload_plugin(modulename):
     if len(module_plugins) > 0:
         m.plugins = module_plugins
 
+    if api_ready:
+        if "plugin_loaded" in m.__dict__:
+            m.plugin_loaded()
+
 def create_application_commands():
     cmds = []
     for class_ in application_command_classes:
@@ -117,6 +126,14 @@ def create_text_commands(view_id):
         cmds.append(class_(view))
     return cmds
 
+def on_api_ready():
+    global api_ready
+    api_ready = True
+
+    for m in sys.modules.values():
+        if "plugin_loaded" in m.__dict__:
+            m.plugin_loaded()
+
 def on_new(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_new']:
@@ -124,7 +141,7 @@ def on_new(view_id):
 
 def on_new_async(view_id):
     v = sublime.View(view_id)
-    for callback in all_callbacks['on_new']:
+    for callback in all_callbacks['on_new_async']:
         callback.on_new_async(v)
 
 def on_clone(view_id):
