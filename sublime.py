@@ -514,7 +514,7 @@ class View(object):
         return sublime_api.view_is_in_edit(self.view_id)
 
     def insert(self, edit, pt, text):
-        sublime_api.view_insert(self.view_id, edit.edit_token, pt, text)
+        return sublime_api.view_insert(self.view_id, edit.edit_token, pt, text)
 
     def erase(self, edit, r):
         sublime_api.view_erase(self.view_id, edit.edit_token, r)
@@ -641,7 +641,7 @@ class View(object):
         return sublime_api.view_text_point(self.view_id, row, col)
 
     def visible_region(self):
-        """ Returns the approixate visible region """
+        """ Returns the approximate visible region """
         return sublime_api.view_visible_region(self.view_id)
 
     def show(self, x, show_surrounds = True):
