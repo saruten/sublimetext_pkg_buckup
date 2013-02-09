@@ -7,4 +7,4 @@ class CopyPathCommand(sublime_plugin.TextCommand):
             sublime.status_message("Copied file path")
 
     def is_enabled(self):
-        return self.view.file_name() and len(self.view.file_name()) > 0
+        return self.view.file_name() != None and len(self.view.file_name()) > 0

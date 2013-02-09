@@ -10,7 +10,7 @@ class SetUnsavedViewName(sublime_plugin.EventListener):
 
     pending = 0
 
-    def on_modified(self, view):
+    def on_modified_async(self, view):
         if view.file_name() or view.is_loading():
             return
 
@@ -18,7 +18,7 @@ class SetUnsavedViewName(sublime_plugin.EventListener):
             return
 
         self.pending += 1
-        sublime.set_timeout(functools.partial(self.update_title, view), 20)
+        sublime.set_timeout_async(functools.partial(self.update_title, view), 20)
 
     def update_title(self, view):
         self.pending -= 1

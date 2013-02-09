@@ -37,7 +37,7 @@ class HtmlCompletions(sublime_plugin.EventListener):
             return []
 
         # Ensure that all other lines have identical expressions
-        for i in xrange(1, len(lines)):
+        for i in range(1, len(lines)):
             ex = match(rex, lines[i])
             if ex != expr:
                 return []

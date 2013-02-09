@@ -36,7 +36,7 @@
         "layer2.opacity": 1.0
     },
 
-    /** Small Icon Buttons **/
+    // Small Icon Buttons
     {
         "class": "icon_button_control",
         "layer0.texture": "Theme - Default/middle_button.png",
@@ -102,7 +102,7 @@
         "layer0.opacity": 1.0
     },
 
-    /** Scrollbars **/
+    // Scrollbars
     {
         "class": "scroll_bar_control",
         "layer0.texture": "Theme - Default/normal_bar_vertical.png",
@@ -292,6 +292,23 @@
         "attributes": ["hover"],
         "layer0.opacity": 1.0
     },
+
+    {
+        "class": "panel_close_button",
+        "layer0.texture": "Theme - Default/dark_x.png",
+        "layer0.opacity": 0.6,
+        "layer1.texture": "Theme - Default/dark_x_light_shadow.png",
+        "layer1.opacity": 0.0,
+        "content_margin": [8, 8]
+    },
+    {
+        "class": "panel_close_button",
+        "attributes": ["hover"],
+        "layer0.opacity": 0.0,
+        "layer1.opacity": 1.0,
+    },
+
+
     {
         "class": "sidebar_container",
         "layer0.tint": [80, 80, 80],
@@ -328,7 +345,8 @@
     {
         "class": "sidebar_label",
         "color": [0, 0, 0],
-        "font.bold": false
+        "font.bold": false,
+        "font.italic": false
         // , "shadow_color": [250, 250, 250], "shadow_offset": [0, 0]
     },
     {
@@ -343,6 +361,12 @@
         "parents": [{"class": "tree_row", "attributes": ["expandable"]}],
         "settings": ["bold_folder_labels"],
         "font.bold": true
+    },
+
+    {
+        "class": "sidebar_label",
+        "attributes": ["transient"],
+        "font.italic": true
     },
 
     {
@@ -374,7 +398,7 @@
         "min_size": [100, 0]
     },
 
-    /** Quick Panel **/
+    // Quick Panel
     {
         "class": "quick_panel",
         "row_padding": [2, 1],
@@ -492,7 +516,7 @@
         "layer1.texture": "Theme - Default/dark_tabset_background_transparent.png"
     },
 
-    /** Tabs **/
+    // Tabs
     {
         "class": "tab_control",
 
@@ -507,13 +531,14 @@
         "layer1.opacity": 0.0,
 
         "layer2.inner_margin": [22, 4],
+        "layer2.opacity": 0.0,
 
         "content_margin": [24, 8, 23, 4],
         "max_margin_trim": 6,
         "hit_test_level": 0.4
     },
 
-    /** Tabs (file color overrides) **/
+    // Tabs (file color overrides)
     {
         "class": "tab_control", "attributes": ["file_light"],
         "layer2.texture": "Theme - Default/light_unselected_tab_bg2.png",
@@ -538,7 +563,7 @@
         "layer2.opacity": 1.0
     },
 
-    /** Selected Tabs **/
+    // Selected Tabs
     {
         "class": "tab_control", "attributes": ["selected"],
         "layer0.texture": "Theme - Default/tab_mask_white.png",
@@ -568,12 +593,13 @@
         "layer0.opacity": 1.0
     },
 
-    /** Tab Labels **/
+    // Tab Labels
     {
         "class": "tab_label",
         "fg": [0, 0, 0, 255],
         "shadow_color": [255, 255, 255, 80],
-        "shadow_offset": [0, 1]
+        "shadow_offset": [0, 1],
+        "font.italic": false
     },
     {
         "class": "tab_label",
@@ -653,8 +679,13 @@
         "settings": ["highlight_modified_tabs"],
         "fg": [255, 161, 52]
     },
+    {
+        "class": "tab_label",
+        "attributes": ["transient"],
+        "font.italic": true
+    },
 
-    /** Tab Close Buttons **/
+    // Tab Close Buttons
     {
         "class": "tab_close_button",
         "content_margin": [0, 0],

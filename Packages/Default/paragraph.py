@@ -2,7 +2,7 @@ import sublime, sublime_plugin
 import string
 import textwrap
 import re
-import comment
+import Default.comment
 
 def previous_line(view, sr):
     """sr should be a Region covering the entire hard line"""
@@ -43,8 +43,8 @@ def expand_to_paragraph(view, tp):
 
     # If the current line starts with a comment, only select lines that are also
     # commented
-    (line_comments, block_comments) = comment.build_comment_data(view, tp)
-    dataStart = comment.advance_to_first_non_white_space_on_line(view, sr.begin())
+    (line_comments, block_comments) = Default.comment.build_comment_data(view, tp)
+    dataStart = Default.comment.advance_to_first_non_white_space_on_line(view, sr.begin())
     for c in line_comments:
         (start, disable_indent) = c
         comment_region = sublime.Region(dataStart,
@@ -198,7 +198,7 @@ class WrapLinesCommand(sublime_plugin.TextCommand):
                 if prefix:
                     txt = txt.replace(prefix, u"")
 
-                txt = string.expandtabs(txt, tab_width)
+                txt = txt.expandtabs(tab_width)
 
                 txt = wrapper.fill(txt) + u"\n"
                 self.view.replace(edit, s, txt)

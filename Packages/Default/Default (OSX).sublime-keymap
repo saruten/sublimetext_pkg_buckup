@@ -164,8 +164,8 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 	{ "keys": ["ctrl+q"], "command": "toggle_record_macro" },
 	{ "keys": ["ctrl+shift+q"], "command": "run_macro" },
 
-	{ "keys": ["super+enter"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line.sublime-macro"} },
-	{ "keys": ["super+shift+enter"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line Before.sublime-macro"} },
+	{ "keys": ["super+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line.sublime-macro"} },
+	{ "keys": ["super+shift+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line Before.sublime-macro"} },
 	{ "keys": ["enter"], "command": "commit_completion", "context":
 		[
 			{ "key": "auto_complete_visible" },
@@ -176,9 +176,12 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 	{ "keys": ["super+t"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
 	{ "keys": ["super+p"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
 	{ "keys": ["super+shift+p"], "command": "show_overlay", "args": {"overlay": "command_palette"} },
-	{ "keys": ["super+ctrl+p"], "command": "prompt_select_project" },
+	{ "keys": ["super+ctrl+p"], "command": "prompt_select_workspace" },
 	{ "keys": ["super+r"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"} },
 	{ "keys": ["ctrl+g"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
+	{ "keys": ["f12"], "command": "goto_definition" },
+	{ "keys": ["super+alt+down"], "command": "goto_definition" },
+	{ "keys": ["super+shift+r"], "command": "goto_symbol_in_project" },
 
 	{ "keys": ["super+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":false} },
 	{ "keys": ["super+shift+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":true} },
@@ -260,7 +263,7 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 			{ "key": "following_text", "operator": "regex_contains", "operand": "^\"", "match_all": true }
 		]
 	},
-	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Left Right.sublime-macro"}, "context":
+	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
 		[
 			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
@@ -292,7 +295,7 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 			{ "key": "following_text", "operator": "regex_contains", "operand": "^'", "match_all": true }
 		]
 	},
-	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Left Right.sublime-macro"}, "context":
+	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
 		[
 			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
@@ -322,7 +325,7 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 			{ "key": "following_text", "operator": "regex_contains", "operand": "^\\)", "match_all": true }
 		]
 	},
-	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Left Right.sublime-macro"}, "context":
+	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
 		[
 			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
@@ -352,7 +355,7 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 			{ "key": "following_text", "operator": "regex_contains", "operand": "^\\]", "match_all": true }
 		]
 	},
-	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Left Right.sublime-macro"}, "context":
+	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
 		[
 			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
@@ -369,6 +372,14 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 			{ "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|]|\\}|$)", "match_all": true }
 		]
 	},
+	{ "keys": ["{"], "command": "wrap_block", "args": {"begin": "{", "end": "}"}, "context":
+		[
+			{ "key": "indented_block", "match_all": true },
+			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+			{ "key": "following_text", "operator": "regex_contains", "operand": "^(?:\t| |\\)|]|\\}|$)", "match_all": true },
+		]
+	},
 	{ "keys": ["{"], "command": "insert_snippet", "args": {"contents": "{${0:$SELECTION}}"}, "context":
 		[
 			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
@@ -382,7 +393,7 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 			{ "key": "following_text", "operator": "regex_contains", "operand": "^\\}", "match_all": true }
 		]
 	},
-	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Left Right.sublime-macro"}, "context":
+	{ "keys": ["backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Left Right.sublime-macro"}, "context":
 		[
 			{ "key": "setting.auto_match_enabled", "operator": "equal", "operand": true },
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
@@ -391,7 +402,7 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 		]
 	},
 
-	{ "keys": ["enter"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line in Braces.sublime-macro"}, "context":
+	{ "keys": ["enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line in Braces.sublime-macro"}, "context":
 		[
 			{ "key": "setting.auto_indent", "operator": "equal", "operand": true },
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
@@ -399,7 +410,7 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 			{ "key": "following_text", "operator": "regex_contains", "operand": "^\\}", "match_all": true }
 		]
 	},
-	{ "keys": ["shift+enter"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line in Braces.sublime-macro"}, "context":
+	{ "keys": ["shift+enter"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Add Line in Braces.sublime-macro"}, "context":
 		[
 			{ "key": "setting.auto_indent", "operator": "equal", "operand": true },
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
@@ -486,11 +497,29 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 	{ "keys": ["ctrl+2"], "command": "focus_group", "args": { "group": 1 } },
 	{ "keys": ["ctrl+3"], "command": "focus_group", "args": { "group": 2 } },
 	{ "keys": ["ctrl+4"], "command": "focus_group", "args": { "group": 3 } },
+	{ "keys": ["ctrl+5"], "command": "focus_group", "args": { "group": 4 } },
+	{ "keys": ["ctrl+6"], "command": "focus_group", "args": { "group": 5 } },
+	{ "keys": ["ctrl+7"], "command": "focus_group", "args": { "group": 6 } },
+	{ "keys": ["ctrl+8"], "command": "focus_group", "args": { "group": 7 } },
+	{ "keys": ["ctrl+9"], "command": "focus_group", "args": { "group": 8 } },
 	{ "keys": ["ctrl+shift+1"], "command": "move_to_group", "args": { "group": 0 } },
 	{ "keys": ["ctrl+shift+2"], "command": "move_to_group", "args": { "group": 1 } },
 	{ "keys": ["ctrl+shift+3"], "command": "move_to_group", "args": { "group": 2 } },
 	{ "keys": ["ctrl+shift+4"], "command": "move_to_group", "args": { "group": 3 } },
+	{ "keys": ["ctrl+shift+5"], "command": "move_to_group", "args": { "group": 4 } },
+	{ "keys": ["ctrl+shift+6"], "command": "move_to_group", "args": { "group": 5 } },
+	{ "keys": ["ctrl+shift+7"], "command": "move_to_group", "args": { "group": 6 } },
+	{ "keys": ["ctrl+shift+8"], "command": "move_to_group", "args": { "group": 7 } },
+	{ "keys": ["ctrl+shift+9"], "command": "move_to_group", "args": { "group": 8 } },
 	{ "keys": ["ctrl+0"], "command": "focus_side_bar" },
+
+	{ "keys": ["super+k", "super+up"], "command": "new_pane" },
+	{ "keys": ["super+k", "super+shift+up"], "command": "new_pane", "args": {"move": false} },
+	{ "keys": ["super+k", "super+down"], "command": "close_pane" },
+	{ "keys": ["super+k", "super+left"], "command": "focus_neighboring_group", "args": {"forward": false} },
+	{ "keys": ["super+k", "super+right"], "command": "focus_neighboring_group" },
+	{ "keys": ["super+k", "super+shift+left"], "command": "move_to_neighboring_group", "args": {"forward": false} },
+	{ "keys": ["super+k", "super+shift+right"], "command": "move_to_neighboring_group" },
 
 	{ "keys": ["super+1"], "command": "select_by_index", "args": { "index": 0 } },
 	{ "keys": ["super+2"], "command": "select_by_index", "args": { "index": 1 } },
@@ -523,7 +552,7 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 
 	{ "keys": ["ctrl+shift+w"], "command": "insert_snippet", "args": { "name": "Packages/XML/long-tag.sublime-snippet" } },
 
-	{ "keys": ["ctrl+shift+k"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Line.sublime-macro"} },
+	{ "keys": ["ctrl+shift+k"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete Line.sublime-macro"} },
 
 	{ "keys": ["super+alt+q"], "command": "wrap_lines" },
 
@@ -606,17 +635,17 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 	{ "keys": ["super+,"], "command": "open_file", "args": {"file": "${packages}/User/Preferences.sublime-settings"} },
 
 	{ "keys": ["super+k", "super+y"], "command": "yank" },
-	{ "keys": ["super+k", "super+k"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard EOL.sublime-macro"} },
-	{ "keys": ["super+k", "super+backspace"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard BOL.sublime-macro"} },
+	{ "keys": ["super+k", "super+k"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard EOL.sublime-macro"} },
+	{ "keys": ["super+k", "super+backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"} },
 	{ "keys": ["super+k", "super+c"], "command": "show_at_center" },
 
 	// These are OS X built in commands, and don't need to be listed here, but
 	// doing so lets them show up in the menu
 	{ "keys": ["ctrl+y"], "command": "yank" },
-	{ "keys": ["super+backspace"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard BOL.sublime-macro"} },
+	{ "keys": ["super+backspace"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard BOL.sublime-macro"} },
 	// super+delete isn't a built in command, but makes sense anyway
-	{ "keys": ["super+delete"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard EOL.sublime-macro"} },
-	{ "keys": ["ctrl+k"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete to Hard EOL.sublime-macro"} },
+	{ "keys": ["super+delete"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard EOL.sublime-macro"} },
+	{ "keys": ["ctrl+k"], "command": "run_macro_file", "args": {"file": "res://Packages/Default/Delete to Hard EOL.sublime-macro"} },
 	{ "keys": ["ctrl+l"], "command": "show_at_center" },
 	{ "keys": ["ctrl+o"], "command": "insert_snippet", "args": { "contents": "$0\n" } },
 	{ "keys": ["ctrl+super+d"], "command": "noop" },

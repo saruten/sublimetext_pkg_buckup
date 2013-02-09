@@ -1,7 +1,6 @@
 import sublime, sublime_plugin
 import os
 import functools
-import send2trash
 
 class NewFileAtCommand(sublime_plugin.WindowCommand):
     def run(self, dirs):
@@ -15,6 +14,8 @@ class NewFileAtCommand(sublime_plugin.WindowCommand):
 
 class DeleteFileCommand(sublime_plugin.WindowCommand):
     def run(self, files):
+        # Import send2trash on demand, to avoid initialising ctypes for as long as possible
+        import Default.send2trash as send2trash
         for f in files:
             send2trash.send2trash(f)
 
@@ -34,6 +35,7 @@ class NewFolderCommand(sublime_plugin.WindowCommand):
 class DeleteFolderCommand(sublime_plugin.WindowCommand):
     def run(self, dirs):
         if sublime.ok_cancel_dialog("Delete Folder?", "Delete"):
+            import Default.send2trash as send2trash
             try:
                 for d in dirs:
                     send2trash.send2trash(d)

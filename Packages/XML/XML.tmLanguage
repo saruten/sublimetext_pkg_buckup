@@ -21,6 +21,8 @@
 	<string>^~X</string>
 	<key>name</key>
 	<string>XML</string>
+	<key>firstLineMatch</key>
+	<string>^&lt;\?xml </string>
 	<key>patterns</key>
 	<array>
 		<dict>

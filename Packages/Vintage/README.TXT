@@ -1,7 +1,7 @@
 Overview:
 --------
 
-Vintage is a vi editing package for Sublime Text 2. It's not quite a faithful recreation, and not all details match up. On the other hand, you do get multiple selections.
+Vintage is a vi editing package for Sublime Text. It's not quite a faithful recreation, and not all details match up. On the other hand, you do get multiple selections.
 
 
 Enabling Vintage:
@@ -19,7 +19,7 @@ to your User File Settings.
 Major Differences From vi:
 --------
 
-Insert mode is plain Sublime Text 2 editing, with the usual Sublime Text 2 key bindings: vi insert mode key bindings are not emulated.
+Insert mode is plain Sublime Text editing, with the usual Sublime Text key bindings: vi insert mode key bindings are not emulated.
 
 Ex commands are not implemented, apart from :w and :e, which work via the command palette.
 

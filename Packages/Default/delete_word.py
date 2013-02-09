@@ -8,7 +8,6 @@ def clamp(xmin, x, xmax):
     return x;
 
 class DeleteWordCommand(sublime_plugin.TextCommand):
-
     def find_by_class(self, pt, classes, forward):
         if forward:
             delta = 1
@@ -45,7 +44,6 @@ class DeleteWordCommand(sublime_plugin.TextCommand):
         return sublime.Region(pos, self.find_by_class(pos + delta, classes, forward))
 
     def run(self, edit, forward = True, sub_words = False):
-
         if forward:
             classes = sublime.CLASS_WORD_END | sublime.CLASS_PUNCTUATION_END | sublime.CLASS_LINE_START
             if sub_words:

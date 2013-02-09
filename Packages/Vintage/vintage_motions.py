@@ -1,11 +1,11 @@
 import re
 import sublime, sublime_plugin
-from vintage import transform_selection
-from vintage import transform_selection_regions
+from Vintage.vintage import transform_selection
+from Vintage.vintage import transform_selection_regions
 
 class ViSpanCountLines(sublime_plugin.TextCommand):
     def run(self, edit, repeat = 1):
-        for i in xrange(repeat - 1):
+        for i in range(repeat - 1):
             self.view.run_command('move', {'by': 'lines',
                                            'extend': True,
                                            'forward': True})
@@ -34,7 +34,7 @@ class ViMoveToHardEol(sublime_plugin.TextCommand):
     def run(self, edit, repeat = 1, extend = False):
         repeat = int(repeat)
         if repeat > 1:
-            for i in xrange(repeat - 1):
+            for i in range(repeat - 1):
                 self.view.run_command('move',
                     {'by': 'lines', 'extend': extend, 'forward': True})
 
@@ -57,7 +57,7 @@ class ViMoveToFirstNonWhiteSpaceCharacter(sublime_plugin.TextCommand):
 
     def run(self, edit, repeat = 1, extend = False, register = '"'):
         # According to Vim's help, _ moves count - 1 lines downward.
-        for i in xrange(repeat - 1):
+        for i in range(repeat - 1):
             self.view.run_command('move', {'by': 'lines', 'forward': True, 'extend': extend})
 
         transform_selection(self.view, lambda pt: self.first_character(pt),
@@ -127,7 +127,7 @@ class ViExtendToEndOfWhitespaceOrWord(sublime_plugin.TextCommand):
             sel.add(r)
 
         # Only the first move differs from a normal move to word end.
-        for i in xrange(repeat - 1):
+        for i in range(repeat - 1):
             self.view.run_command('move', move_args)
 
 # Helper class used to implement ';'' and ',', which repeat the last f, F, t
@@ -217,7 +217,7 @@ class MoveCaretToScreenTop(sublime_plugin.TextCommand):
         screenful = self.view.visible_region()
 
         target = screenful.begin()
-        for x in xrange(lines_offset):
+        for x in range(lines_offset):
             current_line = self.view.line(target)
             target = current_line.b + 1
 
@@ -233,7 +233,7 @@ class MoveCaretToScreenBottom(sublime_plugin.TextCommand):
         screenful = self.view.visible_region()
 
         target = screenful.end()
-        for x in xrange(lines_offset):
+        for x in range(lines_offset):
             current_line = self.view.line(target)
             target = current_line.a - 1
         target = self.view.line(target).a
@@ -258,7 +258,7 @@ class ViExpandToWords(sublime_plugin.TextCommand):
         repeat = int(repeat)
         transform_selection_regions(self.view, lambda r: sublime.Region(r.b + 1, r.b + 1))
         self.view.run_command("move", {"by": "stops", "extend":False, "forward":False, "word_begin":True, "punct_begin":True})
-        for i in xrange(repeat):
+        for i in range(repeat):
             self.view.run_command("move", {"by": "stops", "extend":True, "forward":True, "word_end":True, "punct_end":True})
         if outer:
             transform_selection_regions(self.view, lambda r: expand_to_whitespace(self.view, r))
@@ -268,7 +268,7 @@ class ViExpandToBigWords(sublime_plugin.TextCommand):
         repeat = int(repeat)
         transform_selection_regions(self.view, lambda r: sublime.Region(r.b + 1, r.b + 1))
         self.view.run_command("move", {"by": "stops", "extend":False, "forward":False, "word_begin":True, "punct_begin":True, "separators": ""})
-        for i in xrange(repeat):
+        for i in range(repeat):
             self.view.run_command("move", {"by": "stops", "extend":True, "forward":True, "word_end":True, "punct_end":True, "separators": ""})
         if outer:
             transform_selection_regions(self.view, lambda r: expand_to_whitespace(self.view, r))

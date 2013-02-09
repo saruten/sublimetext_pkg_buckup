@@ -29,10 +29,8 @@ class DiffFilesCommand(sublime_plugin.WindowCommand):
             v = self.window.new_file()
             v.set_name(os.path.basename(files[1]) + " -> " + os.path.basename(files[0]))
             v.set_scratch(True)
-            v.set_syntax_file('Packages/Diff/Diff.tmLanguage')
-            edit = v.begin_edit()
-            v.insert(edit, 0, difftxt)
-            v.end_edit(edit)
+            v.assign_syntax('Packages/Diff/Diff.tmLanguage')
+            v.run_command('append', {'characters': difftxt})
 
     def is_visible(self, files):
         return len(files) == 2
@@ -65,19 +63,17 @@ class DiffChangesCommand(sublime_plugin.TextCommand):
             v = self.view.window().new_file()
             v.set_name("Unsaved Changes: " + os.path.basename(self.view.file_name()))
             v.set_scratch(True)
-            v.set_syntax_file('Packages/Diff/Diff.tmLanguage')
+            v.assign_syntax('Packages/Diff/Diff.tmLanguage')
         else:
             win = self.view.window()
-            v = win.get_output_panel('unsaved_changes')
-            v.set_syntax_file('Packages/Diff/Diff.tmLanguage')
+            v = win.create_output_panel('unsaved_changes')
+            v.assign_syntax('Packages/Diff/Diff.tmLanguage')
             v.settings().set('word_wrap', self.view.settings().get('word_wrap'))
 
-        edit = v.begin_edit()
-        v.insert(edit, 0, difftxt)
-        v.end_edit(edit)
+        v.run_command('append', {'characters': difftxt})
 
         if not use_buffer:
             win.run_command("show_panel", {"panel": "output.unsaved_changes"})
 
     def is_enabled(self):
-        return self.view.is_dirty() and self.view.file_name()
+        return self.view.is_dirty() and self.view.file_name() != None

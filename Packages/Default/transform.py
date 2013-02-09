@@ -15,13 +15,13 @@ class Transformer(sublime_plugin.TextCommand):
             view.replace(edit, s, txt)
 
 class SwapCaseCommand(Transformer):
-    transformer = string.swapcase,
+    transformer = lambda s: s.swapcase(),
 
 class UpperCaseCommand(Transformer):
-    transformer = string.upper,
+    transformer = lambda s: s.upper(),
 
 class LowerCaseCommand(Transformer):
-    transformer = string.lower,
+    transformer = lambda s: s.lower(),
 
 class TitleCaseCommand(Transformer):
     transformer = lambda s: string.capwords(s, " "),

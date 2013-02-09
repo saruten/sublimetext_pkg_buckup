@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
     <key>scope</key>
-    <string>source.c, source.c++, source.objc, source.objc++</string>
+    <string>source.lua</string>
     <key>settings</key>
     <dict>
         <key>cancelCompletion</key>
-        <string>^\s*(\}?\s*(else|try|do|const)|(class|struct|enum|namespace)\s*[a-zA-Z_0-9]+*)$</string>
+        <string>^.*\b(then|end|do|else)$</string>
     </dict>
 </dict>
 </plist>

@@ -1,24 +1,9 @@
 import sublime, sublime_plugin
 import random
 
-# Uglyness needed until SelectionRegions will happily compare themselves
-def srcmp(a, b):
-    aa = a.begin();
-    ba = b.begin();
-
-    if aa < ba:
-        return -1;
-    elif aa == ba:
-        return cmp(a.end(), b.end())
-    else:
-        return 1;
-
-def srtcmp(ta, tb):
-    return srcmp(ta[0], tb[0])
-
 def permute_selection(f, v, e):
     regions = [s for s in v.sel() if not s.empty()]
-    regions.sort(srcmp)
+    regions.sort()
     txt = [v.substr(s) for s in regions]
     txt = f(txt)
 
@@ -28,19 +13,19 @@ def permute_selection(f, v, e):
 
     # Do the replacement in reverse order, so the character offsets don't get
     # invalidated
-    combined = zip(regions, txt)
-    combined.sort(srtcmp, reverse=True)
+    combined = list(zip(regions, txt))
+    combined.sort(key=lambda x: x[0], reverse=True)
 
     for x in combined:
         [r, t] = x
         v.replace(e, r, t)
 
 def case_insensitive_sort(txt):
-    txt.sort(lambda a, b: cmp(a.lower(), b.lower()))
+    txt.sort(key=lambda x: x.lower())
     return txt
 
 def case_sensitive_sort(txt):
-    txt.sort(lambda a, b: cmp(a, b))
+    txt.sort()
     return txt
 
 def reverse_list(l):
@@ -66,7 +51,7 @@ permute_funcs = { "reverse" : reverse_list,
 
 def unique_selection(v):
     regions = [s for s in v.sel() if not s.empty()]
-    regions.sort(srcmp)
+    regions.sort()
 
     dupregions = []
     table = {}
@@ -84,11 +69,11 @@ def unique_selection(v):
 def shrink_wrap_region( view, region ):
     a, b = region.begin(), region.end()
 
-    for a in xrange(a, b):
+    for a in range(a, b):
         if not view.substr(a).isspace():
             break
 
-    for b in xrange(b-1, a, -1):
+    for b in range(b-1, a, -1):
         if not view.substr(b).isspace():
             b += 1
             break
@@ -114,7 +99,7 @@ def permute_lines(f, v, e):
     if not regions:
         regions = [sublime.Region(0, v.size())]
 
-    regions.sort(srcmp, reverse=True)
+    regions.sort(reverse=True)
 
     for r in regions:
         txt = v.substr(r)

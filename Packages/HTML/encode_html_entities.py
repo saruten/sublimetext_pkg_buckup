@@ -1,9 +1,7 @@
-#!/usr/bin/env python
-
 import sublime
 import sublime_plugin
 
-from htmlentitydefs import codepoint2name as cp2n
+from html.entities import codepoint2name as cp2n
 
 class EncodeHtmlEntities(sublime_plugin.TextCommand):
     def run(self, edit, **args):
@@ -12,7 +10,7 @@ class EncodeHtmlEntities(sublime_plugin.TextCommand):
         for sel in view.sel():
             buf = []
 
-            for pt in xrange(sel.begin(), sel.end()):
+            for pt in range(sel.begin(), sel.end()):
                 ch = view.substr(pt)
                 ch_ord = ord(ch)
 
