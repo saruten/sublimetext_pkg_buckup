@@ -10,7 +10,7 @@ class NewBuildSystemCommand(sublime_plugin.WindowCommand):
         v.set_name('untitled.sublime-build')
 
         template = """{
-	"cmd": ["${0:make}"]
+	"shell_cmd": "${0:make}"
 }
 """
         v.run_command("insert_snippet", {"contents": template})

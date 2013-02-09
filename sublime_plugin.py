@@ -70,6 +70,7 @@ def reload_plugin(modulename):
         m = importlib.import_module(modulename)
 
     module_plugins = []
+    on_activated_targets = []
     for type_name in dir(m):
         try:
             t = m.__dict__[type_name]
@@ -94,6 +95,9 @@ def reload_plugin(modulename):
                         if p[0] in dir(obj):
                             p[1].append(obj)
 
+                    if "on_activated" in dir(obj):
+                        on_activated_targets.append(obj)
+
                     module_plugins.append(obj)
 
         except AttributeError:
@@ -105,6 +109,14 @@ def reload_plugin(modulename):
     if api_ready:
         if "plugin_loaded" in m.__dict__:
             m.plugin_loaded()
+
+        # Synthesize any required on_activated calls
+        for el in on_activated_targets:
+            w = sublime.active_window()
+            if w:
+                v = w.active_view()
+                if v:
+                    el.on_activated(v)
 
 def create_application_commands():
     cmds = []
@@ -130,9 +142,16 @@ def on_api_ready():
     global api_ready
     api_ready = True
 
-    for m in sys.modules.values():
+    for m in list(sys.modules.values()):
         if "plugin_loaded" in m.__dict__:
             m.plugin_loaded()
+
+    # Synthesize an on_activated call
+    w = sublime.active_window()
+    if w:
+        view_id = sublime_api.window_active_view(w.window_id)
+        if view_id != 0:
+            on_activated(view_id)
 
 def on_new(view_id):
     v = sublime.View(view_id)

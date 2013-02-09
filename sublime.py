@@ -757,6 +757,9 @@ class View(object):
     def find_all_results(self):
         return sublime_api.view_find_all_results(self.view_id)
 
+    def command_history(self, delta, modifying_only = False):
+        return sublime_api.view_command_history(self.view_id, delta, modifying_only)
+
 class Settings(object):
     def __init__(self, id):
         self.settings_id = id
