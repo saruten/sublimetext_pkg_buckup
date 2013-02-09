@@ -406,7 +406,7 @@ class Selection(object):
 
     def add(self, x):
         if isinstance(x, Region):
-            sublime_api.view_selection_add_region(self.view_id, x.a, x.b)
+            sublime_api.view_selection_add_region(self.view_id, x.a, x.b, x.xpos)
         else:
             sublime_api.view_selection_add_point(self.view_id, x)
 
@@ -576,6 +576,9 @@ class View(object):
 
     def match_selector(self, pt, selector):
         return sublime_api.view_match_selector(self.view_id, pt, selector)
+
+    def score_selector(self, pt, selector):
+        return sublime_api.view_score_selector(self.view_id, pt, selector)
 
     def find_by_selector(self, selector):
         return sublime_api.view_find_by_selector(self.view_id, selector)

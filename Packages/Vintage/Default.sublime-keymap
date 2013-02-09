@@ -108,7 +108,7 @@
 	},
 
 	{ "keys": ["o"], "command": "enter_insert_mode", "args":
-		{"insert_command": "run_macro_file", "insert_args": {"file": "Packages/Default/Add Line.sublime-macro"} },
+		{"insert_command": "run_macro_file", "insert_args": {"file": "res://Packages/Default/Add Line.sublime-macro"} },
 		"context": [{"key": "setting.command_mode"}]
 	},
 	{ "keys": ["o"], "command": "vi_reverse_selections_direction",
@@ -120,7 +120,7 @@
 	},
 
 	{ "keys": ["O"], "command": "enter_insert_mode", "args":
-		{"insert_command": "run_macro_file", "insert_args": {"file": "Packages/Default/Add Line Before.sublime-macro"} },
+		{"insert_command": "run_macro_file", "insert_args": {"file": "res://Packages/Default/Add Line Before.sublime-macro"} },
 		"context": [{"key": "setting.command_mode"}]
 	},
 

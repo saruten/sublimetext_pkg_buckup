@@ -225,7 +225,7 @@ def normalise_completion(c):
     if len(c) == 1:
         return (c[0], "", "")
     elif len(c) == 2:
-        return (c[0], c[1], "")
+        return (c[0], "", c[1])
     else:
         return c
 

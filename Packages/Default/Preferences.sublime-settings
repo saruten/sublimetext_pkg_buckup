@@ -256,6 +256,9 @@
     // Controls side bar animation when expanding or collapsing folders
     "tree_animation_enabled": true,
 
+    // Controls animation throughout the application
+    "animation_enabled": true,
+
     // Makes tabs with modified files more visible
     "highlight_modified_tabs": false,
 
@@ -264,12 +267,12 @@
     // Show folders in the side bar in bold
     "bold_folder_labels": false,
 
-    // OS X 10.7 only: Set to true to disable Lion style full screen support.
+    // OS X only: Set to true to disable Lion style full screen support.
     // Sublime Text must be restarted for this to take effect.
     "use_simple_full_screen": false,
 
     // OS X only. Valid values are true, false, and "auto". Auto will enable
-    // the setting when running on a screen 2880 pixels or wider (i.e., a
+    // the setting when running on a screen 2560 pixels or wider (i.e., a
     // Retina display). When this setting is enabled, OpenGL is used to
     // accelerate drawing. Sublime Text must be restarted for changes to take
     // effect.
