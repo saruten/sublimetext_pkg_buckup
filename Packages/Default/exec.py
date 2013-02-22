@@ -220,7 +220,7 @@ class ExecCommand(sublime_plugin.WindowCommand, ProcessListener):
         # in memory.
         str = str.replace('\r\n', '\n').replace('\r', '\n')
 
-        self.output_view.run_command('append', {'characters': str, 'force': True})
+        self.output_view.run_command('append', {'characters': str, 'force': True, 'scroll_to_end': True})
 
     def append_string(self, proc, str):
         self.append_data(proc, str.encode(self.encoding))

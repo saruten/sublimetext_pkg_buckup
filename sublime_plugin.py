@@ -19,6 +19,7 @@ all_callbacks = {'on_new': [], 'on_clone': [], 'on_load': [], 'on_close': [],
     'on_pre_save': [], 'on_post_save': [], 'on_modified': [],
     'on_selection_modified': [],'on_activated': [], 'on_deactivated': [],
     'on_query_context': [], 'on_query_completions': [],
+    'on_text_command': [], 'on_window_command': [],
 
     'on_modified_async': [],
     'on_selection_modified_async': [],
@@ -280,6 +281,26 @@ def on_query_completions(view_id, prefix, locations):
             completions += [normalise_completion(c) for c in res]
 
     return (completions,flags)
+
+def on_text_command(view_id, name, args):
+    v = sublime.View(view_id)
+    for callback in all_callbacks['on_text_command']:
+        res = callback.on_text_command(v, name, args)
+        if isinstance(res, tuple):
+            return res
+        elif res:
+            return (res, None)
+    return ("", None)
+
+def on_window_command(window_id, name, args):
+    window = sublime.Window(window_id)
+    for callback in all_callbacks['on_text_command']:
+        res = callback.on_window_command(window, name, args)
+        if isinstance(res, tuple):
+            return res
+        elif res:
+            return (res, None)
+    return ("", None)
 
 class Command(object):
     def name(self):

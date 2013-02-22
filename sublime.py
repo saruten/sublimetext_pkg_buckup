@@ -109,6 +109,29 @@ def log_indexing(flag):
 def score_selector(scope_name, selector):
     return sublime_api.score_selector(scope_name, selector)
 
+def load_resource(name):
+    s = sublime_api.load_resource(name)
+    if s == None:
+        raise IOError("resource not found")
+    return s
+
+def load_binary_resource(name):
+    bytes = sublime_api.load_binary_resource(name)
+    if bytes == None:
+        raise IOError("resource not found")
+    return bytes
+
+def encode_value(val, pretty = False):
+    return sublime_api.encode_value(val, pretty)
+
+def decode_value(data):
+    val, err = sublime_api.decode_value(data)
+
+    if err:
+        raise ValueError(err)
+
+    return val
+
 def load_settings(base_name):
     settings_id = sublime_api.load_settings(base_name)
     return Settings(settings_id)
@@ -760,6 +783,12 @@ class View(object):
     def command_history(self, delta, modifying_only = False):
         return sublime_api.view_command_history(self.view_id, delta, modifying_only)
 
+    def overwrite_status(self):
+        return sublime_api.view_get_overwrite_status(self.view_id)
+
+    def set_overwrite_status(self, value):
+        sublime_api.view_set_overwrite_status(self.view_id, value)
+
 class Settings(object):
     def __init__(self, id):
         self.settings_id = id
@@ -780,7 +809,7 @@ class Settings(object):
         return sublime_api.settings_erase(self.settings_id, key)
 
     def add_on_change(self, tag, callback):
-        print("Not yet implemented!")
+        sublime_api.settings_add_on_change(self.settings_id, tag, callback)
 
     def clear_on_change(self, tag):
-        print("Not yet implemented!")
+        sublime_api.settings_clear_on_change(self.settings_id, tag)

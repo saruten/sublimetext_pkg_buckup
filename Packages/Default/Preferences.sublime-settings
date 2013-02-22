@@ -171,6 +171,10 @@
     // or application
     "save_on_focus_lost": false,
 
+    // Save via writing to an alternate file, and then renaming it over the
+    // original file.
+    "atomic_save": false,
+
     // The encoding to use when the encoding can't be determined automatically.
     // ASCII, UTF-8 and UTF-16 encodings will be automatically detected.
     "fallback_encoding": "Western (Windows 1252)",
