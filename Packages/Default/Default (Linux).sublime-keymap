@@ -222,11 +222,15 @@
 	{ "keys": ["ctrl+;"], "command": "show_overlay", "args": {"overlay": "goto", "text": "#"} },
 	{ "keys": ["f12"], "command": "goto_definition" },
 	{ "keys": ["ctrl+shift+r"], "command": "goto_symbol_in_project" },
+	{ "keys": ["alt+-"], "command": "jump_back" },
+	{ "keys": ["alt+shift+-"], "command": "jump_forward" },
+	{ "keys": ["alt+keypad_minus"], "command": "jump_back" },
+	{ "keys": ["alt+shift+keypad_minus"], "command": "jump_forward" },
 
-	{ "keys": ["ctrl+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":false} },
-	{ "keys": ["ctrl+shift+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":true} },
-	{ "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find"} },
-	{ "keys": ["ctrl+h"], "command": "show_panel", "args": {"panel": "replace"} },
+	{ "keys": ["ctrl+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false} },
+	{ "keys": ["ctrl+shift+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true} },
+	{ "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false} },
+	{ "keys": ["ctrl+h"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
 	{ "keys": ["ctrl+shift+h"], "command": "replace_next" },
 	{ "keys": ["f3"], "command": "find_next" },
 	{ "keys": ["shift+f3"], "command": "find_prev" },
@@ -457,6 +461,21 @@
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
 			{ "key": "preceding_text", "operator": "regex_contains", "operand": "\\{$", "match_all": true },
 			{ "key": "following_text", "operator": "regex_contains", "operand": "^\\}", "match_all": true }
+		]
+	},
+
+	{ "keys": ["enter"], "command": "insert_snippet", "args": {"contents": "\n\t$0\n"}, "context":
+		[
+			{ "key": "setting.auto_indent", "operator": "equal", "operand": true },
+			{ "key": "selector", "operator": "equal", "operand": "meta.scope.between-tag-pair", "match_all": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+		]
+	},
+	{ "keys": ["enter"], "command": "insert_snippet", "args": {"contents": "\n\t$0\n"}, "context":
+		[
+			{ "key": "setting.auto_indent", "operator": "equal", "operand": true },
+			{ "key": "selector", "operator": "equal", "operand": "meta.scope.between-tag-pair", "match_all": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
 		]
 	},
 

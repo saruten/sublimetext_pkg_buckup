@@ -371,8 +371,24 @@
 
     {
         "class": "minimap_control",
-        "viewport_color": [68, 68, 68, 96]
+        "settings": ["always_show_minimap"],
+        "viewport_color": [68, 68, 68, 96],
+        "viewport_opacity": 1.0,
     },
+
+    {
+        "class": "minimap_control",
+        "settings": ["!always_show_minimap"],
+        "viewport_color": [68, 68, 68, 128],
+        "viewport_opacity": { "target": 0.0, "speed": 4.0, "interpolation": "smoothstep" },
+    },
+    {
+        "class": "minimap_control",
+        "attributes": ["hover"],
+        "settings": ["!always_show_minimap"],
+        "viewport_opacity": { "target": 1.0, "speed": 6.0, "interpolation": "smoothstep" },
+    },
+
     {
         "class": "text_line_control",
         "layer0.texture": "Theme - Default/input_field.png",

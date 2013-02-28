@@ -173,7 +173,7 @@
 
     // Save via writing to an alternate file, and then renaming it over the
     // original file.
-    "atomic_save": false,
+    "atomic_save": true,
 
     // The encoding to use when the encoding can't be determined automatically.
     // ASCII, UTF-8 and UTF-16 encodings will be automatically detected.
@@ -210,7 +210,7 @@
     "auto_complete_delay": 50,
 
     // Controls what scopes auto complete will be triggered in
-    "auto_complete_selector": "source - comment",
+    "auto_complete_selector": "source - comment, meta.tag - punctuation.definition.tag.begin",
 
     // Additional situations to trigger auto complete
     "auto_complete_triggers": [ {"selector": "text.html", "characters": "<"} ],
@@ -332,7 +332,7 @@
     // are listed in folders on the side bar. These can also be set on a per-
     // project basis.
     "folder_exclude_patterns": [".svn", ".git", ".hg", "CVS"],
-    "file_exclude_patterns": ["*.pyc", "*.pyo", "*.exe", "*.dll", "*.obj","*.o", "*.a", "*.lib", "*.so", "*.dylib", "*.ncb", "*.sdf", "*.suo", "*.pdb", "*.idb", ".DS_Store", "*.class", "*.psd", "*.db"],
+    "file_exclude_patterns": ["*.pyc", "*.pyo", "*.exe", "*.dll", "*.obj","*.o", "*.a", "*.lib", "*.so", "*.dylib", "*.ncb", "*.sdf", "*.suo", "*.pdb", "*.idb", ".DS_Store", "*.class", "*.psd", "*.db", "*.sublime-workspace"],
     // These files will still show up in the side bar, but won't be included in
     // Goto Anything or Find in Files
     "binary_file_patterns": ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.ttf", "*.tga", "*.dds", "*.ico", "*.eot", "*.pdf", "*.swf", "*.jar", "*.zip"],

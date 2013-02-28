@@ -17,12 +17,20 @@ FORCE_GROUP = 8
 IGNORECASE = 2
 LITERAL = 1
 MONOSPACE_FONT = 1
+
 DRAW_EMPTY = 1
 HIDE_ON_MINIMAP = 2
 DRAW_EMPTY_AS_OVERWRITE = 4
 PERSISTENT = 16
+# Deprecated, use DRAW_NO_FILL instead
 DRAW_OUTLINED = 32
+DRAW_NO_FILL = 32
+DRAW_NO_OUTLINE = 256
+DRAW_SOLID_UNDERLINE = 512
+DRAW_STIPPLED_UNDERLINE = 1024
+DRAW_SQUIGGLY_UNDERLINE = 2048
 HIDDEN = 128
+
 OP_EQUAL = 0
 OP_NOT_EQUAL = 1
 OP_REGEX_MATCH = 2
@@ -120,6 +128,9 @@ def load_binary_resource(name):
     if bytes == None:
         raise IOError("resource not found")
     return bytes
+
+def find_resources(pattern):
+    return sublime_api.find_resources(pattern)
 
 def encode_value(val, pretty = False):
     return sublime_api.encode_value(val, pretty)
@@ -427,10 +438,10 @@ class Selection(object):
         sublime_api.view_selection_erase(self.view_id, index)
 
     def __eq__(self, rhs):
-        return list(self) == list(rhs)
+        return rhs != None and list(self) == list(rhs)
 
     def __lt__(self, rhs):
-        return list(self) < list(rhs)
+        return rhs != None and list(self) < list(rhs)
 
     def clear(self):
         sublime_api.view_selection_clear(self.view_id)
@@ -803,10 +814,10 @@ class Settings(object):
         return sublime_api.settings_has(self.settings_id, key)
 
     def set(self, key, value):
-        return sublime_api.settings_set(self.settings_id, key, value)
+        sublime_api.settings_set(self.settings_id, key, value)
 
     def erase(self, key):
-        return sublime_api.settings_erase(self.settings_id, key)
+        sublime_api.settings_erase(self.settings_id, key)
 
     def add_on_change(self, tag, callback):
         sublime_api.settings_add_on_change(self.settings_id, tag, callback)

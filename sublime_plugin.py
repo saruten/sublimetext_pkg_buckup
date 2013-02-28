@@ -6,6 +6,7 @@ import os
 import sys
 import zipfile
 import sublime_api
+import traceback
 
 api_ready = False
 
@@ -15,7 +16,7 @@ text_command_classes = []
 
 all_command_classes = [application_command_classes, window_command_classes, text_command_classes]
 
-all_callbacks = {'on_new': [], 'on_clone': [], 'on_load': [], 'on_close': [],
+all_callbacks = {'on_new': [], 'on_clone': [], 'on_load': [], 'on_pre_close': [], 'on_close': [],
     'on_pre_save': [], 'on_post_save': [], 'on_modified': [],
     'on_selection_modified': [],'on_activated': [], 'on_deactivated': [],
     'on_query_context': [], 'on_query_completions': [],
@@ -109,7 +110,10 @@ def reload_plugin(modulename):
 
     if api_ready:
         if "plugin_loaded" in m.__dict__:
-            m.plugin_loaded()
+            try:
+                m.plugin_loaded()
+            except:
+                traceback.print_exc()
 
         # Synthesize any required on_activated calls
         for el in on_activated_targets:
@@ -117,7 +121,10 @@ def reload_plugin(modulename):
             if w:
                 v = w.active_view()
                 if v:
-                    el.on_activated(v)
+                    try:
+                        el.on_activated(v)
+                    except:
+                        traceback.print_exc()
 
 def create_application_commands():
     cmds = []
@@ -145,116 +152,190 @@ def on_api_ready():
 
     for m in list(sys.modules.values()):
         if "plugin_loaded" in m.__dict__:
-            m.plugin_loaded()
+            try:
+                m.plugin_loaded()
+            except:
+                traceback.print_exc()
 
     # Synthesize an on_activated call
     w = sublime.active_window()
     if w:
         view_id = sublime_api.window_active_view(w.window_id)
         if view_id != 0:
-            on_activated(view_id)
+            try:
+                on_activated(view_id)
+            except:
+                traceback.print_exc()
 
 def on_new(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_new']:
-        callback.on_new(v)
+        try:
+            callback.on_new(v)
+        except:
+            traceback.print_exc()
 
 def on_new_async(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_new_async']:
-        callback.on_new_async(v)
+        try:
+            callback.on_new_async(v)
+        except:
+            traceback.print_exc()
 
 def on_clone(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_clone']:
-        callback.on_clone(v)
+        try:
+            callback.on_clone(v)
+        except:
+            traceback.print_exc()
 
 def on_clone_async(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_clone_async']:
-        callback.on_clone_async(v)
+        try:
+            callback.on_clone_async(v)
+        except:
+            traceback.print_exc()
 
 def on_load(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_load']:
-        callback.on_load(v)
+        try:
+            callback.on_load(v)
+        except:
+            traceback.print_exc()
 
 def on_load_async(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_load_async']:
-        callback.on_load_async(v)
+        try:
+            callback.on_load_async(v)
+        except:
+            traceback.print_exc()
+
+def on_pre_close(view_id):
+    v = sublime.View(view_id)
+    for callback in all_callbacks['on_pre_close']:
+        try:
+            callback.on_pre_close(v)
+        except:
+            traceback.print_exc()
 
 def on_close(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_close']:
-        callback.on_close(v)
+        try:
+            callback.on_close(v)
+        except:
+            traceback.print_exc()
 
 def on_pre_save(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_pre_save']:
-        callback.on_pre_save(v)
+        try:
+            callback.on_pre_save(v)
+        except:
+            traceback.print_exc()
 
 def on_pre_save_async(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_pre_save_async']:
-        callback.on_pre_save_async(v)
+        try:
+            callback.on_pre_save_async(v)
+        except:
+            traceback.print_exc()
 
 def on_post_save(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_post_save']:
-        callback.on_post_save(v)
+        try:
+            callback.on_post_save(v)
+        except:
+            traceback.print_exc()
 
 def on_post_save_async(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_post_save_async']:
-        callback.on_post_save_async(v)
+        try:
+            callback.on_post_save_async(v)
+        except:
+            traceback.print_exc()
 
 def on_modified(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_modified']:
-        callback.on_modified(v)
+        try:
+            callback.on_modified(v)
+        except:
+            traceback.print_exc()
 
 def on_modified_async(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_modified_async']:
-        callback.on_modified_async(v)
+        try:
+            callback.on_modified_async(v)
+        except:
+            traceback.print_exc()
 
 def on_selection_modified(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_selection_modified']:
-        callback.on_selection_modified(v)
+        try:
+            callback.on_selection_modified(v)
+        except:
+            traceback.print_exc()
 
 def on_selection_modified_async(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_selection_modified_async']:
-        callback.on_selection_modified_async(v)
+        try:
+            callback.on_selection_modified_async(v)
+        except:
+            traceback.print_exc()
 
 def on_activated(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_activated']:
-        callback.on_activated(v)
+        try:
+            callback.on_activated(v)
+        except:
+            traceback.print_exc()
 
 def on_activated_async(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_activated_async']:
-        callback.on_activated_async(v)
+        try:
+            callback.on_activated_async(v)
+        except:
+            traceback.print_exc()
 
 def on_deactivated(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_deactivated']:
-        callback.on_deactivated(v)
+        try:
+            callback.on_deactivated(v)
+        except:
+            traceback.print_exc()
 
 def on_deactivated_async(view_id):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_deactivated_async']:
-        callback.on_deactivated_async(v)
+        try:
+            callback.on_deactivated_async(v)
+        except:
+            traceback.print_exc()
 
 def on_query_context(view_id, key, operator, operand, match_all):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_query_context']:
-        val = callback.on_query_context(v, key, operator, operand, match_all)
-        if val:
-            return True
+        try:
+            val = callback.on_query_context(v, key, operator, operand, match_all)
+            if val:
+                return True
+        except:
+            traceback.print_exc()
 
     return False
 
@@ -272,34 +353,45 @@ def on_query_completions(view_id, prefix, locations):
     completions = []
     flags = 0
     for callback in all_callbacks['on_query_completions']:
-        res = callback.on_query_completions(v, prefix, locations)
+        try:
+            res = callback.on_query_completions(v, prefix, locations)
 
-        if isinstance(res, tuple):
-            completions += [normalise_completion(c) for c in res[0]]
-            flags |= res[1]
-        elif isinstance(res, list):
-            completions += [normalise_completion(c) for c in res]
+            if isinstance(res, tuple):
+                completions += [normalise_completion(c) for c in res[0]]
+                flags |= res[1]
+            elif isinstance(res, list):
+                completions += [normalise_completion(c) for c in res]
+        except:
+            traceback.print_exc()
 
     return (completions,flags)
 
 def on_text_command(view_id, name, args):
     v = sublime.View(view_id)
     for callback in all_callbacks['on_text_command']:
-        res = callback.on_text_command(v, name, args)
-        if isinstance(res, tuple):
-            return res
-        elif res:
-            return (res, None)
+        try:
+            res = callback.on_text_command(v, name, args)
+            if isinstance(res, tuple):
+                return res
+            elif res:
+                return (res, None)
+        except:
+            traceback.print_exc()
+
     return ("", None)
 
 def on_window_command(window_id, name, args):
     window = sublime.Window(window_id)
-    for callback in all_callbacks['on_text_command']:
-        res = callback.on_window_command(window, name, args)
-        if isinstance(res, tuple):
-            return res
-        elif res:
-            return (res, None)
+    for callback in all_callbacks['on_window_command']:
+        try:
+            res = callback.on_window_command(window, name, args)
+            if isinstance(res, tuple):
+                return res
+            elif res:
+                return (res, None)
+        except:
+            traceback.print_exc()
+
     return ("", None)
 
 class Command(object):

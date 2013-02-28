@@ -182,11 +182,13 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 	{ "keys": ["f12"], "command": "goto_definition" },
 	{ "keys": ["super+alt+down"], "command": "goto_definition" },
 	{ "keys": ["super+shift+r"], "command": "goto_symbol_in_project" },
+	{ "keys": ["alt+minus"], "command": "jump_back" },
+	{ "keys": ["alt+shift+minus"], "command": "jump_forward" },
 
-	{ "keys": ["super+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":false} },
-	{ "keys": ["super+shift+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":true} },
-	{ "keys": ["super+f"], "command": "show_panel", "args": {"panel": "find"} },
-	{ "keys": ["super+alt+f"], "command": "show_panel", "args": {"panel": "replace"} },
+	{ "keys": ["super+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false} },
+	{ "keys": ["super+shift+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true} },
+	{ "keys": ["super+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false} },
+	{ "keys": ["super+alt+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
 	{ "keys": ["super+alt+e"], "command": "replace_next" },
 	{ "keys": ["super+g"], "command": "find_next" },
 	{ "keys": ["super+shift+g"], "command": "find_prev" },
@@ -420,6 +422,21 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 		]
 	},
 
+	{ "keys": ["enter"], "command": "insert_snippet", "args": {"contents": "\n\t$0\n"}, "context":
+		[
+			{ "key": "setting.auto_indent", "operator": "equal", "operand": true },
+			{ "key": "selector", "operator": "equal", "operand": "meta.scope.between-tag-pair", "match_all": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+		]
+	},
+	{ "keys": ["enter"], "command": "insert_snippet", "args": {"contents": "\n\t$0\n"}, "context":
+		[
+			{ "key": "setting.auto_indent", "operator": "equal", "operand": true },
+			{ "key": "selector", "operator": "equal", "operand": "meta.scope.between-tag-pair", "match_all": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+		]
+	},
+
 	{
 		"keys": ["super+alt+1"],
 		"command": "set_layout",
@@ -547,8 +564,8 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 	{ "keys": ["super+k", "super+x"], "command": "swap_with_mark" },
 	{ "keys": ["super+k", "super+g"], "command": "clear_bookmarks", "args": {"name": "mark"} },
 
-	{ "keys": ["super+plus"], "command": "increase_font_size" },
 	{ "keys": ["super+equals"], "command": "increase_font_size" },
+	{ "keys": ["super+plus"], "command": "increase_font_size" },
 	{ "keys": ["super+minus"], "command": "decrease_font_size" },
 
 	{ "keys": ["ctrl+shift+w"], "command": "insert_snippet", "args": { "name": "Packages/XML/long-tag.sublime-snippet" } },

@@ -211,11 +211,15 @@
 	{ "keys": ["ctrl+;"], "command": "show_overlay", "args": {"overlay": "goto", "text": "#"} },
 	{ "keys": ["f12"], "command": "goto_definition" },
 	{ "keys": ["ctrl+shift+r"], "command": "goto_symbol_in_project" },
+	{ "keys": ["alt+-"], "command": "jump_back" },
+	{ "keys": ["alt+shift+-"], "command": "jump_forward" },
+	{ "keys": ["alt+keypad_minus"], "command": "jump_back" },
+	{ "keys": ["alt+shift+keypad_minus"], "command": "jump_forward" },
 
-	{ "keys": ["ctrl+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":false} },
-	{ "keys": ["ctrl+shift+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse":true} },
-	{ "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find"} },
-	{ "keys": ["ctrl+h"], "command": "show_panel", "args": {"panel": "replace"} },
+	{ "keys": ["ctrl+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false} },
+	{ "keys": ["ctrl+shift+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true} },
+	{ "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find", "reverse": false} },
+	{ "keys": ["ctrl+h"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
 	{ "keys": ["ctrl+shift+h"], "command": "replace_next" },
 	{ "keys": ["f3"], "command": "find_next" },
 	{ "keys": ["shift+f3"], "command": "find_prev" },
@@ -449,6 +453,21 @@
 		]
 	},
 
+	{ "keys": ["enter"], "command": "insert_snippet", "args": {"contents": "\n\t$0\n"}, "context":
+		[
+			{ "key": "setting.auto_indent", "operator": "equal", "operand": true },
+			{ "key": "selector", "operator": "equal", "operand": "meta.scope.between-tag-pair", "match_all": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+		]
+	},
+	{ "keys": ["enter"], "command": "insert_snippet", "args": {"contents": "\n\t$0\n"}, "context":
+		[
+			{ "key": "setting.auto_indent", "operator": "equal", "operand": true },
+			{ "key": "selector", "operator": "equal", "operand": "meta.scope.between-tag-pair", "match_all": true },
+			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
+		]
+	},
+
 	{
 		"keys": ["alt+shift+1"],
 		"command": "set_layout",
@@ -590,6 +609,11 @@
 	{ "keys": ["ctrl+keypad_plus"], "command": "increase_font_size" },
 	{ "keys": ["ctrl+-"], "command": "decrease_font_size" },
 	{ "keys": ["ctrl+keypad_minus"], "command": "decrease_font_size" },
+
+	{ "keys": ["ctrl+equals"], "command": "increase_font_size" },
+	{ "keys": ["ctrl+shift+equals"], "command": "decrease_font_size" },
+	{ "keys": ["ctrl+keypad_plus"], "command": "increase_font_size" },
+	{ "keys": ["ctrl+shift+keypad_plus"], "command": "decrease_font_size" },
 
 	{ "keys": ["alt+shift+w"], "command": "insert_snippet", "args": { "name": "Packages/XML/long-tag.sublime-snippet" } },
 

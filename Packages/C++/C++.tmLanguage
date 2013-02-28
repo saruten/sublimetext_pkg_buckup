@@ -77,9 +77,15 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(this)\b</string>
+			<string>\bthis\b</string>
 			<key>name</key>
 			<string>variable.language.c++</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\bnullptr\b</string>
+			<key>name</key>
+			<string>constant.language.c++</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -101,7 +107,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(class|wchar_t)\b</string>
+			<string>\b(class|wchar_t|nullptr_t)\b</string>
 			<key>name</key>
 			<string>storage.type.c++</string>
 		</dict>

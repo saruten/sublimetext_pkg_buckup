@@ -307,6 +307,7 @@
             { "command": "select_lines", "args": {"forward": false}, "caption": "Add Previous Line" },
             { "command": "select_lines", "args": {"forward": true}, "caption": "Add Next Line" },
             { "command": "single_selection" },
+            { "command": "invert_selection" },
             { "caption": "-" },
             { "command": "select_all" },
             { "command": "expand_selection", "args": {"to": "line"}, "caption": "Expand Selection to Line" },
@@ -324,12 +325,12 @@
         "id": "find",
         "children":
         [
-            { "command": "show_panel", "args": {"panel": "find"}, "caption": "Find…" },
+            { "command": "show_panel", "args": {"panel": "find", "reverse": false}, "caption": "Find…" },
             { "command": "find_next" },
             { "command": "find_prev", "caption": "Find Previous" },
             { "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false}, "caption": "Incremental Find" },
             { "caption": "-" },
-            { "command": "show_panel", "args": {"panel": "replace"}, "caption": "Replace…" },
+            { "command": "show_panel", "args": {"panel": "replace", "reverse": false}, "caption": "Replace…" },
             { "command": "replace_next" },
             { "caption": "-" },
             { "command": "find_under", "caption": "Quick Find" },
@@ -623,6 +624,9 @@
             { "command": "goto_definition", "caption": "Goto Definition…" },
             // { "command": "show_overlay", "args": {"overlay": "goto", "text": "#"}, "caption": "Goto Word…" },
             { "command": "show_overlay", "args": {"overlay": "goto", "text": ":"}, "caption": "Goto Line…" },
+            { "caption": "-" },
+            { "command": "jump_back", "caption": "Jump Back" },
+            { "command": "jump_forward", "caption": "Jump Forward" },
             { "caption": "-" },
             {
                 "caption": "Switch File",
