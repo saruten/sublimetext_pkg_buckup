@@ -211,10 +211,10 @@
 	{ "keys": ["ctrl+;"], "command": "show_overlay", "args": {"overlay": "goto", "text": "#"} },
 	{ "keys": ["f12"], "command": "goto_definition" },
 	{ "keys": ["ctrl+shift+r"], "command": "goto_symbol_in_project" },
-	{ "keys": ["alt+-"], "command": "jump_back" },
-	{ "keys": ["alt+shift+-"], "command": "jump_forward" },
 	{ "keys": ["alt+keypad_minus"], "command": "jump_back" },
 	{ "keys": ["alt+shift+keypad_minus"], "command": "jump_forward" },
+	{ "keys": ["alt+-"], "command": "jump_back" },
+	{ "keys": ["alt+shift+-"], "command": "jump_forward" },
 
 	{ "keys": ["ctrl+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false} },
 	{ "keys": ["ctrl+shift+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true} },

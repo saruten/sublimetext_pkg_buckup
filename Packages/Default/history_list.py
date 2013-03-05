@@ -11,7 +11,7 @@ class JumpHistory():
     Stores the current jump history
     """
 
-    QUEUE_LIMIT = 100
+    LIST_LIMIT = 100
 
     def __init__(self):
         self.history_list = []
@@ -105,9 +105,12 @@ class JumpHistory():
             i -= 1
 
     def generate_key(self):
+        # generate enough keys for 5 times the jump history limit
+        # this can still cause clashes as new history can be erased when we jump
+        # back several steps and jump again.
         self.key_counter += 1
-        self.key_counter %= self.QUEUE_LIMIT * 5
-        return 'jump_history' + hex(self.key_counter)
+        self.key_counter %= self.LIST_LIMIT * 5
+        return 'jump_key_' + hex(self.key_counter)
 
     def clear_history_before_current(self):
         # remove all unwanted regions
@@ -119,13 +122,13 @@ class JumpHistory():
         self.current_item = -1
 
     def trim_selections(self):
-        if len(self.history_list) >= self.QUEUE_LIMIT:
+        if len(self.history_list) >= self.LIST_LIMIT:
             # max reached, remove everything too old
-            for i in range(self.QUEUE_LIMIT, len(self.history_list)):
+            for i in range(self.LIST_LIMIT, len(self.history_list)):
                 # erase the regions from view
                 view, key = self.history_list[i]
                 view.erase_regions(key)
-            del self.history_list[self.QUEUE_LIMIT : len(self.history_list)]
+            del self.history_list[self.LIST_LIMIT : len(self.history_list)]
 
     def len(self):
         return len(self.history_list)
@@ -168,9 +171,11 @@ class JumpHistoryUpdater(sublime_plugin.EventListener):
             # will handle this
             if view.window().active_view() == view:
                 get_jump_history(view.window().id()).push_selection(view)
-        elif name == 'move_to' and args['to'] == 'bof' and args['to'] == 'eof':
-            # move to bof/eof
-            get_jump_history(view.window().id()).push_selection(view)
+        elif name == 'move_to':
+            where_to = args.get('to')
+            if where_to == 'bof' or where_to == 'eof':
+                # move to bof/eof
+                get_jump_history(view.window().id()).push_selection(view)
 
     def on_window_command(self, window, name, args):
         if name == 'goto_definition':
@@ -295,7 +300,6 @@ class Unittest(unittest.TestCase):
     def run():
         # redefine the modules to use the mock version
         global sublime
-        global sublime_plugin
 
         sublime_module = sublime
         # use the normal region

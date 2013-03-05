@@ -29,9 +29,9 @@ class TitleCaseCommand(Transformer):
 def rot13(ch):
     o = ord(ch)
     if o >= ord('a') and o <= ord('z'):
-        return unichr((o - ord('a') + 13) % 26 + ord('a'))
+        return chr((o - ord('a') + 13) % 26 + ord('a'))
     if o >= ord('A') and o <= ord('Z'):
-        return unichr((o - ord('A') + 13) % 26 + ord('A'))
+        return chr((o - ord('A') + 13) % 26 + ord('A'))
     return ch
 
 class Rot13Command(Transformer):

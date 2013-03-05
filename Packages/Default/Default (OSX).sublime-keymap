@@ -182,8 +182,8 @@ and don't need to be repeated here. Anything listed here will take precedence, h
 	{ "keys": ["f12"], "command": "goto_definition" },
 	{ "keys": ["super+alt+down"], "command": "goto_definition" },
 	{ "keys": ["super+shift+r"], "command": "goto_symbol_in_project" },
-	{ "keys": ["alt+minus"], "command": "jump_back" },
-	{ "keys": ["alt+shift+minus"], "command": "jump_forward" },
+	{ "keys": ["ctrl+minus"], "command": "jump_back" },
+	{ "keys": ["ctrl+shift+minus"], "command": "jump_forward" },
 
 	{ "keys": ["super+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": false} },
 	{ "keys": ["super+shift+i"], "command": "show_panel", "args": {"panel": "incremental_find", "reverse": true} },

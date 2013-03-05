@@ -97,6 +97,10 @@
     // the color scheme
     "draw_minimap_border": false,
 
+    // Always visualise the viewport on the minimap, as oppossed to only
+    // showing it on mouse over
+    "always_show_minimap_viewport": false,
+
     // If enabled, will highlight any line with a caret
     "highlight_line": false,
 
