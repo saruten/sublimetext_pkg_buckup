@@ -471,7 +471,7 @@
 			{ "key": "selection_empty", "operator": "equal", "operand": true, "match_all": true },
 		]
 	},
-	{ "keys": ["enter"], "command": "insert_snippet", "args": {"contents": "\n\t$0\n"}, "context":
+	{ "keys": ["shift+enter"], "command": "insert_snippet", "args": {"contents": "\n\t$0\n"}, "context":
 		[
 			{ "key": "setting.auto_indent", "operator": "equal", "operand": true },
 			{ "key": "selector", "operator": "equal", "operand": "meta.scope.between-tag-pair", "match_all": true },
@@ -693,5 +693,14 @@
 	},
 	{ "keys": ["alt+enter"], "command": "find_all", "args": {"close_panel": true},
 		"context": [{"key": "panel", "operand": "incremental_find"}, {"key": "panel_has_focus"}]
+	},
+
+	// HTML, XML close tag
+	{ "keys": ["/"], "command": "close_tag", "args": { "insert_slash": true }, "context":
+		[
+			{ "key": "selector", "operator": "equal", "operand": "text.html, text.xml", "match_all": true },
+			{ "key": "preceding_text", "operator": "regex_match", "operand": ".*<$", "match_all": true },
+			{ "key": "setting.auto_close_tags" }
+		]
 	}
 ]

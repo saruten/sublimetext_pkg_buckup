@@ -229,6 +229,9 @@
     // Only relevant if auto_complete_commit_on_tab is true.
     "auto_complete_with_fields": false,
 
+    // Automatically close HTML and XML tags when </ is entered.
+    "auto_close_tags": true,
+
     // By default, shift+tab will only unindent if the selection spans
     // multiple lines. When pressing shift+tab at other times, it'll insert a
     // tab character - this allows tabs to be inserted when tab_completion is
