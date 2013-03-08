@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
     <key>scope</key>
-    <string>source.php</string>
+    <string>source.css meta.selector</string>
     <key>settings</key>
     <dict>
         <key>cancelCompletion</key>
-        <string>^\s*(\}?\s*(else|do|try)|(class|function)\s*[a-zA-Z_0-9]+)$</string>
+        <string></string>
     </dict>
 </dict>
 </plist>

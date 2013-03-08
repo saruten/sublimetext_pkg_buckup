@@ -227,7 +227,7 @@ class HtmlTagCompletions(sublime_plugin.EventListener):
 
         line_head = line[0:pt - search_start]
         line_tail = line[pt - search_start:]
-        
+
         # find the tag from end of line_head
         i = len(line_head) - 1
         tag = None
@@ -241,7 +241,7 @@ class HtmlTagCompletions(sublime_plugin.EventListener):
             if c == ' ':
                 space_index = i
             i -= 1
-        
+
         # check that this tag looks valid
         if not tag or not tag.isalnum():
             return []

@@ -231,7 +231,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.html</string>
+					<string>punctuation.definition.tag.begin.html</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -262,7 +262,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.tag.html</string>
+							<string>punctuation.definition.tag.end.html</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -289,7 +289,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.tag.html</string>
+					<string>punctuation.definition.tag.begin.html</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -323,7 +323,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.tag.html</string>
+							<string>punctuation.definition.tag.end.html</string>
 						</dict>
 						<key>2</key>
 						<dict>
