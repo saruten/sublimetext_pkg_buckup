@@ -221,10 +221,14 @@ class Window(object):
         sublime_api.window_focus_group(self.window_id, idx)
 
     def focus_view(self, view):
-        sublime_api.window_focus_view(self.window_id, view.view_id)
+        if view:
+            sublime_api.window_focus_view(self.window_id, view.view_id)
 
     def get_view_index(self, view):
-        return sublime_api.window_get_view_index(self.window_id, view.view_id)
+        if view:
+            return sublime_api.window_get_view_index(self.window_id, view.view_id)
+        else:
+            return (-1, -1)
 
     def set_view_index(self, view, group, idx):
         sublime_api.window_set_view_index(self.window_id, view.view_id, group, idx)

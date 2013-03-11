@@ -1098,7 +1098,7 @@ class MoveGroupFocus(sublime_plugin.WindowCommand):
         active_group = self.window.active_group()
         x1, y1, x2, y2 = cells[active_group]
 
-        idxs = range(len(cells))
+        idxs = list(range(len(cells)))
         del idxs[active_group]
 
         # Matches are any group that shares a border with the active group in the
@@ -1114,6 +1114,6 @@ class MoveGroupFocus(sublime_plugin.WindowCommand):
 
         # Focus the first group found in the specified direction, if there is one.
         try:
-            self.window.focus_group(matches.next())
+            self.window.focus_group(next(matches))
         except StopIteration:
             return

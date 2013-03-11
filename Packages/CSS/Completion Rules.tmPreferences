@@ -7,7 +7,7 @@
     <key>settings</key>
     <dict>
         <key>cancelCompletion</key>
-        <string></string>
+        <string>.*</string>
     </dict>
 </dict>
 </plist>

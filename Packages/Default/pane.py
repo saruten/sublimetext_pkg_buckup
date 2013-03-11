@@ -154,7 +154,6 @@ class ClosePaneCommand(sublime_plugin.WindowCommand):
         max_columns = self.window.template_settings().get('max_columns', MAX_COLUMNS)
         self.close_pane(self.window, group, max_columns)
 
-
 def is_automatic_layout(window):
     last_automatic_layout = window.settings().get('last_automatic_layout')
     if last_automatic_layout == None:
@@ -203,7 +202,6 @@ class FocusNeighboringGroup(sublime_plugin.WindowCommand):
             group = (group - 1) % self.window.num_groups()
 
         self.window.focus_group(group)
-
 
 class MoveToNeighboringGroup(sublime_plugin.WindowCommand):
     def run(self, forward = True):
